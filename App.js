@@ -19,7 +19,9 @@ Ext.define('CustomApp', {
         var MyStore = Ext.create('Rally.data.wsapi.Store', {
             
             model: "User Story",
+            
             autoLoad: true ,
+            
             listeners: {
                 load: function(myStore,myData,success){
                     console.log("My Store is" , myStore);
@@ -30,7 +32,19 @@ Ext.define('CustomApp', {
                 scope: this
             },
             
-            fetch: ["FormattedID", "Name", "ScheduleState"]
+            filters: [
+                {
+                    property: "c_KanbanState",
+                    operator: "=",
+                    value:    "Accepted"
+                }
+                
+                
+            ],
+            
+            context: this.getContext().getProject()._ref,
+            
+            fetch: ["FormattedID", "Name", "Owner", "InProgressDate", "c_KanbanState"]  
         });
     },
     
@@ -38,7 +52,7 @@ Ext.define('CustomApp', {
         
         var myGrid = Ext.create("Rally.ui.grid.Grid", {
             store: myDataStore,
-            columnCfgs: ["FormattedID", "Name", "ScheduleState"]
+            columnCfgs: ["FormattedID", "Name", "Owner", "InProgressDate", "c_KanbanState"]
         });
         
         this.add(myGrid);

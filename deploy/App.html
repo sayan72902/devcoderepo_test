@@ -7,7 +7,7 @@
 
     <script type="text/javascript">
         Rally.onReady(function () {
-                Ext.define("CustomApp",{extend:"Rally.app.App",componentCls:"app",launch:function(){console.log("Hello World"),this._loadData(),console.log("What is This?",this)},_loadData:function(){console.log("inside data block");var MyStore=Ext.create("Rally.data.wsapi.Store",{model:"User Story",autoLoad:!0,listeners:{load:function(myStore,myData,success){console.log("My Store is",myStore),console.log("My Data is",myData),this._loadDataGrid(myStore)},scope:this},fetch:["FormattedID","Name","ScheduleState"]})},_loadDataGrid:function(myDataStore){var myGrid=Ext.create("Rally.ui.grid.Grid",{store:myDataStore,columnCfgs:["FormattedID","Name","ScheduleState"]});this.add(myGrid)}});
+                Ext.define("CustomApp",{extend:"Rally.app.App",componentCls:"app",launch:function(){console.log("Hello World"),this._loadData(),console.log("What is This?",this)},_loadData:function(){console.log("inside data block");var MyStore=Ext.create("Rally.data.wsapi.Store",{model:"User Story",autoLoad:!0,listeners:{load:function(myStore,myData,success){console.log("My Store is",myStore),console.log("My Data is",myData),this._loadDataGrid(myStore)},scope:this},filters:[{property:"c_KanbanState",operator:"=",value:"Accepted"}],context:this.getContext().getProject()._ref,fetch:["FormattedID","Name","Owner","InProgressDate","c_KanbanState"]})},_loadDataGrid:function(myDataStore){var myGrid=Ext.create("Rally.ui.grid.Grid",{store:myDataStore,columnCfgs:["FormattedID","Name","Owner","InProgressDate","c_KanbanState"]});this.add(myGrid)}});
 
             Rally.launchApp('CustomApp', {
                 name:"RallyAppTest",
