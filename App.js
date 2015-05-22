@@ -44,7 +44,7 @@ Ext.define('CustomApp', {
             
             context: this.getContext().getProject()._ref,
             
-            fetch: ["FormattedID", "Name", "Owner", "InProgressDate", "ScheduleState" , "c_KanbanState"]  
+            fetch: ["FormattedID", "Name", "Feature", "Owner", "InProgressDate", "ScheduleState" , "c_KanbanState"]  
         });
     },
     
@@ -52,7 +52,7 @@ Ext.define('CustomApp', {
         
         var myGrid = Ext.create("Rally.ui.grid.Grid", {
             store: myDataStore,
-            columnCfgs: ["FormattedID", "Name", "Owner", "InProgressDate", "ScheduleState" , "c_KanbanState"]
+            columnCfgs: ["FormattedID", "Name", "Feature", "Owner", "InProgressDate", "ScheduleState" , "c_KanbanState"]
         });
         
         this.add(myGrid);
